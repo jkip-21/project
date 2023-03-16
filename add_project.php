@@ -7,7 +7,6 @@ get_header();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Dashboard Builder</title>
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../wp-content/themes/vanced/assets/css/advanced.css">
     <link rel="stylesheet" href="../wp-content/themes/vanced/assets/css/add.css">
@@ -19,6 +18,10 @@ get_header();
         border-radius: 5px;
         color: white;
     }
+   .navbar {
+    margin-top: -7px;
+    margin-left: 275px;
+}
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -67,7 +70,6 @@ get_header();
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>shop </title>
                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="Rounded-Icons" transform="translate(-1716.000000, -439.000000)"
                                         fill="#FFFFFF" fill-rule="nonzero">
@@ -100,7 +102,6 @@ get_header();
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>office</title>
                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="Rounded-Icons" transform="translate(-1869.000000, -293.000000)"
                                         fill="#FFFFFF" fill-rule="nonzero">
@@ -127,7 +128,6 @@ get_header();
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>credit-card</title>
                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="Rounded-Icons" transform="translate(-2169.000000, -745.000000)"
                                         fill="#FFFFFF" fill-rule="nonzero">
@@ -154,7 +154,6 @@ get_header();
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>settings</title>
                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="Rounded-Icons" transform="translate(-2020.000000, -442.000000)"
                                         fill="#FFFFFF" fill-rule="nonzero">
@@ -184,7 +183,6 @@ get_header();
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>settings</title>
                                 <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="Rounded-Icons" transform="translate(-2020.000000, -442.000000)"
                                         fill="#FFFFFF" fill-rule="nonzero">
@@ -266,8 +264,7 @@ get_header();
                         </div>
                     </div>
                 </div>
-
-
+                
                 <div class="col-xl-3 col-sm-6">
                     <div class="card mb-4">
                         <div class="card-body p-3">
@@ -288,6 +285,27 @@ get_header();
                         </div>
                     </div>
                 </div>
+                <div class="col-xl-3 col-sm-6">
+                    <div class="card mb-4">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Projects</p>
+                                        <h5 class="text-success mb-0 font-weight-bolder">0</h5>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <section class='desc'>
@@ -329,7 +347,7 @@ if (isset($_POST['cpt_nonce_field']) && wp_verify_nonce($_POST['cpt_nonce_field'
         // create post object with the form values
         // Create a new project post
         $project_title = sanitize_text_field($_POST['title']);
-        $project_description = sanitize_text_field($_POST['description']);
+        $project_desc = sanitize_text_field($_POST['description']);
         $project_start_date = sanitize_text_field($_POST['start']);
         $project_due_date = sanitize_text_field($_POST['due']);
         $project_status = 'Pending';
@@ -337,7 +355,7 @@ if (isset($_POST['cpt_nonce_field']) && wp_verify_nonce($_POST['cpt_nonce_field'
 
         $new_project = array(
             'post_title' => $project_title,
-            'post_content' => $project_content,
+            'post_content' => $project_desc,
             'post_status' => 'publish',
             'post_type' => $_POST['project'],
             'meta_input' => array(
@@ -398,7 +416,7 @@ if (isset($_POST['cpt_nonce_field']) && wp_verify_nonce($_POST['cpt_nonce_field'
                                         ?>
                                         <div class='col'>
                                             <label for='user'>Assign User:</label><br>
-                                            <select class="form-control" id="user" name="user">
+                                            <select class="form-control" id="user" name="user" required>
                                                 <option value="">Assign User:</option>
                                                 <?php foreach ($user_options as $user_id => $user_name): ?>
                                                     <option value="<?php echo $user_id; ?>"><?php echo $user_name; ?>
@@ -419,7 +437,7 @@ if (isset($_POST['cpt_nonce_field']) && wp_verify_nonce($_POST['cpt_nonce_field'
                                         <input type='date' class='form-control' name='due' placeholder='' required>
                                     </div>
                                     <div class='form-outline mb-4 '>
-                                        <label class='form-label' for='textAreaExample6'>Description:</label>
+                                        <label class='form-label' for='textAreaExample6'><?php _e('Project Description:', 'mytextdomain'); ?></label>
                                         <textarea class='form-control' id='textAreaExample6' name="description" rows='5'
                                             placeholder="Enter project description..." required></textarea>
                                     </div>
